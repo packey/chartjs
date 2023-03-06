@@ -1,0 +1,15 @@
+{
+  "production": false,
+  "api-missing": {
+    "base": "/api"
+  },
+  "auth": {
+    "domain": "tecan-dev.eu.auth0.com",
+    "clientId": "ML6oMoOiJOtcI3WLD7V9YEnOg89qcl1I",
+    "redirectUri": "https://localhost:4200",
+    "audience": "remotedeploymentapi",
+    "httpInterceptor": {
+      "allowedList": ["/api/*"]
+    }
+  }
+}

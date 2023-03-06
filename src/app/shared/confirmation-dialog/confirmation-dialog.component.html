@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>{{ data.headerTitle | translate }}</h2>
+
+<mat-dialog-content *ngIf="data.content">
+  <p>{{ data.content | translate }}</p>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <tec-button appearance="small-secondary" [mat-dialog-close]="action.Cancel" data-e2e="cancel">
+    {{ data.actionLabels.cancel | translate }}
+  </tec-button>
+
+  <tec-button appearance="small-primary" [mat-dialog-close]="action.Confirm" data-e2e="confirm">
+    {{ data.actionLabels.confirm | translate }}
+  </tec-button>
+</mat-dialog-actions>

@@ -1,0 +1,49 @@
+{
+  "core": {
+    "appName": "Mockup SPA",
+    "fatalError": {
+      "title": "Fataler Fehler",
+      "description": "Die Anwendung konnte nicht gestartet werden.\nBitte versuchen Sie es später erneut.\nWenn das Problem weiterhin besteht, wenden Sie sich bitte an einen Administrator.",
+      "tryAgain": "Versuchen Sie es nochmal",
+      "logout": "Ausloggen"
+    },
+    "notFound": {
+      "title": "Seite nicht gefunden",
+      "description": "YSie haben versucht, auf eine Seite zuzugreifen, die nicht existiert.",
+      "goHome": "Nach Hause gehen",
+      "logout": "Ausloggen"
+    }
+  },
+
+  "shared": {
+    "paging": {
+      "itemsPerPage": "Objekte pro Seite",
+      "nextPage": "Nächste Seite",
+      "previousPage": "Vorherige Seite",
+      "firstPage": "Erste Seite",
+      "lastPage": "Letzte Seite",
+      "range": "Seite {{page}} von {{totalPages}}"
+    }
+  },
+
+  "profile": {
+    "title": "Profil",
+    "logout": "Ausloggen",
+    "language": "Sprache",
+    "trademark": "© {{releaseYear}} - {{lastUpdateYear}}, Tecan Trading AG, alle rechte vorbehalten.",
+    "version": "Ausführung: {{version}}",
+    "termsOfUse": "Nutzungsbedingungen",
+    "privacy": "Datenschutz",
+    "cookies": "Cookies",
+    "theme": "Thema",
+    "themeOptions": {
+      "light": "Licht",
+      "dark": "Dunkel",
+      "device": "Gerätedesign verwenden"
+    }
+  },
+
+  "instruments": {
+    "title": "Instrumente"
+  }
+}

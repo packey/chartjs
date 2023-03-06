@@ -1,0 +1,11 @@
+<tec-sidebar class="sidebar" color="primary">
+  <tec-sidebar-item
+    *ngFor="let menuItem of menuItems; trackBy: trackBy"
+    routerLinkActive
+    #rla="routerLinkActive"
+    [routerLink]="menuItem.routerLink"
+    [menuItem]="menuItem"
+    [isActive]="rla.isActive || !!menuItem.isActive"
+  >
+  </tec-sidebar-item>
+</tec-sidebar>

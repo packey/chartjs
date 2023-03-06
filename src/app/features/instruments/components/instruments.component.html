@@ -1,0 +1,47 @@
+<h1>{{ 'instruments.title' | translate }}</h1>
+<tec-button (click)="onConfirmClick()" appearance="small-secondary">Confirm</tec-button>
+<tec-button (click)="onToastClick()" appearance="small-primary">Toast</tec-button>
+
+<div class="instruments">
+  <div>
+    <h1>2. Bar chart</h1>
+    <canvas #barCanvas style="height:10vh; width:20vw"></canvas>
+    <hr color="red">
+  </div>
+  <section class="instruments-body overflow-container">
+    <table mat-table matSort [trackBy]="getById" [dataSource]="instrumentsDataSource"
+      [attr.aria-label]="'instruments.title' | translate">
+      <ng-container matColumnDef="alias">
+        <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Alias' }}
+        </th>
+
+        <td mat-cell *matCellDef="let item">{{ item.alias }}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="serialNumber">
+        <th scope="col" mat-header-cell *matHeaderCellDef mat-sort-header>
+          {{ 'Serial Number' }}
+        </th>
+
+        <td mat-cell *matCellDef="let item">{{ item.serialNumber }}</td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </section>
+
+  <div class="instruments-footer">
+    <span class="count">
+      <tec-icon key="Instrument"></tec-icon>
+
+      <span>{{ instrumentsDataSource.filteredData.length }}</span>
+    </span>
+
+    <mat-paginator [length]="instrumentsDataSource.filteredData.length" [pageSizeOptions]="pageSizeOptions"
+      showFirstLastButtons>
+    </mat-paginator>
+  </div>
+</div>

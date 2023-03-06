@@ -1,0 +1,67 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger: none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  - group: ms-teams-webhook-urls
+
+resources:
+  repositories:
+  - repository: tecan-devops-pipeline-templates
+    type: git
+    name: tecan-devops/tecan-devops-pipeline-templates
+    ref: refs/heads/Development
+
+stages:
+- stage: Build
+  jobs:
+    - job: Build
+      steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '14.x'
+        displayName: 'Install Node.js'
+
+      - task: Npm@1
+        displayName: 'install npm modules'
+        inputs:
+          command: 'install'
+          verbose: false
+
+      - script: |
+          set -e
+          npm run lint:ci
+        displayName: 'npm lint'
+
+      - task: SonarQubePrepare@5
+        inputs:
+          SonarQube: 'Tecan Sonar'
+          scannerMode: 'CLI'
+          configMode: 'file'
+        displayName:  Prepate Sonar Connection
+
+      - script: |
+          npm run build -- --output-path dist/ignite-app
+        displayName: 'Build'
+
+      - script: |
+          npm run test
+        displayName: 'run unit tests'
+
+      - task: SonarQubeAnalyze@5
+        displayName: Sonar Analysis Phase
+
+      - task: SonarQubePublish@5
+        inputs:
+          pollingTimeoutSec: '300'
+        displayName:  Publish Sonar Results
+
+      - template: pipeline-notifications.yaml@tecan-devops-pipeline-templates
+        parameters:
+          pipelineNotificationsWebhookUrl: "$(dev-pipeline-notifications-webhook-url)"

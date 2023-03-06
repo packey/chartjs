@@ -1,0 +1,36 @@
+<mat-drawer-container [hasBackdrop]="true">
+  <mat-drawer-content class="app">
+    <tec-header
+      class="app-header"
+      [appName]="'core.appName' | translate"
+      [userName]="userProfileService.profile.name ?? ''"
+      (userInfoClick)="drawer.toggle()"
+    ></tec-header>
+
+    <capp-main-menu class="app-menu" [menuItems]="menuItems"></capp-main-menu>
+
+    <div class="app-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-drawer-content>
+
+  <mat-drawer #drawer mode="side" position="end" class="app-drawer">
+    <tec-profile
+      [userName]="userProfileService.profile.name || null"
+      [organizationName]="userProfileService.profile.organizationName || null"
+      [roles]="roles"
+      [selectedLanguage]="userSettingsService.language"
+      [languages]="userSettingsService.languageOptions"
+      [selectedTheme]="userSettingsService.theme"
+      [themeOptions]="themeOptions"
+      [copyright]="appConfigService.copyright"
+      [version]="appConfigService.version || ''"
+      [regulatoryLinks]="links"
+      (changeLanguage)="onChangeLanguage($event)"
+      (changeTheme)="onChangeTheme($event)"
+      (logout)="onLogout()"
+      (closed)="drawer.toggle()"
+    >
+    </tec-profile>
+  </mat-drawer>
+</mat-drawer-container>

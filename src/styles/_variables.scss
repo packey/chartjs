@@ -1,0 +1,76 @@
+$space-base: 4px;
+$space-1: $space-base;
+$space-2: $space-base * 2;
+$space-3: $space-base * 3;
+$space-4: $space-base * 4;
+$space-5: $space-base * 5;
+$space-6: $space-base * 6;
+$space-7: $space-base * 7;
+$space-8: $space-base * 8;
+$space-10: $space-base * 10;
+$space-11: $space-base * 11;
+$space-12: $space-base * 12;
+$space-13: $space-base * 13;
+$space-14: $space-base * 14;
+$space-15: $space-base * 15;
+$space-16: $space-base * 16;
+$space-18: $space-base * 18;
+$space-20: $space-base * 20;
+$space-24: $space-base * 24;
+$space-32: $space-base * 32;
+
+// Font variables
+$font-family: 'Manrope', serif;
+$font-size-title-big: 24px;
+$font-weight-title-big: bold;
+$font-size-title: 16px;
+$font-weight-title: bold;
+$font-size: 16px;
+$font-weight: normal;
+$font-size-light: 16px;
+$font-weight-light: 400;
+$font-size-paragraph-small: 12px;
+$font-size-paragraph-medium: 14px;
+$font-weight-paragraph-small: 500;
+$line-height-paragraph-small: 16px;
+
+// Table
+$default-column-padding: $space-2;
+$action-menu-width: 40px;
+$action-column-width: $action-menu-width;
+$name-column-width: 40%;
+$row-height: 40px;
+
+// Layout
+$grid-cols: 12;
+$sidebar-width: 280px;
+$columns-gap: $space-4;
+$rows-gap: $space-4;
+$content-padding: $space-6;
+$header-height: 56px;
+$expander-header-height: 80px;
+$form-width: 50rem;
+
+// Misc
+$tag-border-radius: 3px;
+$box-border-radius: 4px;
+$box-padding: $space-6;
+$box-spacing: $space-4;
+$box-indent: $space-20;
+
+// z-index layers
+$z-index-s: 1;
+$z-index-m: 3;
+$z-index-l: 100;
+$z-index-xl: 101;
+$z-index-xxl: 102;
+$z-index-xxxl: 103;
+$z-index-max: 104;
+$breakpoints: (
+  xxs: 0,
+  xs: 240px,
+  s: 384px,
+  m: 600px,
+  l: 848px,
+  xl: 1360px
+);

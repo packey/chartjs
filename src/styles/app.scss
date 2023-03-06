@@ -1,0 +1,63 @@
+@use './tecan-ui';
+@use './material';
+@use './variables' as *;
+
+* {
+  box-sizing: border-box;
+  font-family: $font-family;
+}
+
+body,
+html {
+  height: 100%;
+  margin: 0;
+  font-size: 100%;
+}
+
+h1,
+h2,
+h3,
+b,
+strong {
+  font-family: $font-family;
+}
+
+body {
+  &,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: var(--label-text-color);
+    margin: 0;
+  }
+
+  h1,
+  h2 {
+    text-transform: capitalize;
+    font-size: $font-size-title-big;
+    font-weight: $font-weight-title-big;
+  }
+}
+
+.app-content {
+  background-color: var(--color-surface-hover);
+}
+
+.success {
+  color: var(--color-primary-70);
+}
+
+.error {
+  color: var(--color-status-error);
+}
+
+.inactive {
+  color: var(--color-surface-disabled);
+}
+
+.active {
+  color: var(--color-status-success);
+}

@@ -1,0 +1,97 @@
+@use 'src/styles/variables' as *;
+
+@mixin box {
+  display: block;
+  background-color: var(--color-surface-base);
+  padding: $box-padding;
+  border-radius: $box-border-radius;
+  box-shadow: var(--elevation-light-10);
+}
+
+@mixin input-with-button() {
+  display: flex;
+  margin-bottom: $space-6;
+  align-items: flex-end;
+
+  .tec-input {
+    flex: 1;
+    margin-right: $space-10;
+  }
+
+  .tec-button {
+    width: 200px;
+  }
+}
+
+@mixin count-icon {
+  flex: 0 1 auto;
+  display: flex;
+  align-items: center;
+  font-size: $font-size-title;
+  font-weight: $font-weight-title;
+
+  .tec-icon {
+    margin: 0 $space-3 0 $space-2;
+  }
+}
+
+@mixin table-footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: $space-4;
+
+  & > * {
+    flex: 1;
+  }
+
+  .count {
+    @include count-icon;
+  }
+}
+
+@mixin remove-column-left-border($column) {
+  .mat-header-cell.mat-column-#{$column},
+  .mat-cell.mat-column-#{$column},
+  .mat-row:nth-child(odd) .mat-cell.mat-column-#{$column} {
+    border-left-width: 0;
+  }
+}
+
+// so that buttons do not have white background on grey rows
+@mixin transparent-button-background {
+  ::ng-deep tec-button {
+    &:not(&:active, &:hover, &:focus) button {
+      background-color: transparent;
+    }
+  }
+}
+
+@mixin breakpoint($breakpoint) {
+  @if map-has-key($breakpoints, $breakpoint) {
+    @media (min-width: map-get($breakpoints, $breakpoint)) {
+      @content;
+    }
+  } @else {
+    @error 'Unknown breakpoint #{$breakpoint}. Known breakpoints are #{map-keys($breakpoints)}.';
+  }
+}
+
+@mixin search-in-header() {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: $space-4;
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  tec-input {
+    width: 50%;
+  }
+}
+
+@mixin view-alignment() {
+  padding: $space-10;
+}

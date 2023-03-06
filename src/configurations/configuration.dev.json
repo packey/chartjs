@@ -1,0 +1,30 @@
+{
+  "production": true,
+  "api": {
+    "base": "/api"
+  },
+  "auth": {
+    "domain": "login-dev.tecan.com",
+    "clientId": "R5MNmnxtQlhPCHeQPStSMpGzlKjxQUu3",
+    "redirectUri": "https://organizationmanagement-dev.tecan.com/",
+    "audience": "organizationmanagementapi",
+    "httpInterceptor": {
+      "allowedList": ["/api/*"]
+    }
+  },
+  "i18n": {
+    "supportedLanguages": [
+      { "code": "en", "name": "English" },
+      { "code": "de", "name": "Deutsch" }
+    ]
+  },
+  "links": {
+    "termsOfUse": "https://www.tecan.com/terms-of-use-privacy-and-cookies-policy?p=tab--1",
+    "privacy": "https://www.tecan.com/terms-of-use-privacy-and-cookies-policy?p=tab--2",
+    "cookies": "https://www.tecan.com/terms-of-use-privacy-and-cookies-policy?p=tab--3"
+  },
+  "copyright": {
+    "releaseYear": 2023,
+    "lastUpdateYear": 2023
+  }
+}

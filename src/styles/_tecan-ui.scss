@@ -1,0 +1,26 @@
+@use '@tecan/ui' as tec;
+
+// Import core Tecan UI styles
+@include tec.core;
+
+.tec-dark-theme {
+  @include tec.tecan-dark-theme;
+}
+
+.tec-light-theme {
+  @include tec.tecan-light-theme;
+}
+
+.tec-device-theme {
+  @media (prefers-color-scheme: dark) {
+    @include tec.tecan-dark-theme;
+  }
+
+  @media (prefers-color-scheme: light) {
+    @include tec.tecan-light-theme;
+  }
+}
+
+.tec-no-transitions * {
+  transition: none !important;
+}
