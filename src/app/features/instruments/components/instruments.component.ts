@@ -23,6 +23,7 @@ export class InstrumentsComponent implements AfterViewInit {
   @ViewChild('barCanvas') barCanvas: ElementRef | undefined;
   barChart: any;
   tmpLab: any;
+  data: any;
 
   labels: any[] = [];
   DATA_COUNT = 7;
@@ -230,6 +231,12 @@ export class InstrumentsComponent implements AfterViewInit {
     });
     console.log("tmpLab ", this.tmpLab);
     console.log("lables", this.labels);
+
+    // this.data = years.map((year, index) => ({
+    //   x: moment(`${year}-01-01`),
+    //   y: moment(`1970-02-01 ${times[index]}`).valueOf()
+    // }));
+
     // data = {
     //   labels: labels,
     //   datasets: [
@@ -296,17 +303,21 @@ export class InstrumentsComponent implements AfterViewInit {
           label: '# of Votes',
           data: [{
             x: '2021-11-06',
-            y: [1526652800, 1626652800],
+            //y: [1526652800, 1626652800],
+            y: [moment(`1970-02-01 11:45`).valueOf(), moment(`1970-02-01 11:55`).valueOf()],
           }, {
             x: '2021-11-07',
-            y: [927862400, 1006652800],
+            //y: [927862400, 1006652800],
+            y: [moment(`1970-02-01 13:35`).valueOf(), moment(`1970-02-01 14:55`).valueOf()],
           }, {
             x: '2021-11-07',
-            y: [327862400, 527862400],
+            // y: [327862400, 527862400],
+            y: [moment(`1970-02-01 16:45`).valueOf(), moment(`1970-02-01 17:15`).valueOf()],
           },
           {
             x: '2021-11-07',
-            y: [1337862400, 1447862400],
+            // y: [1337862400, 1447862400],
+            y: [moment(`1970-02-01 10:45`).valueOf(), moment(`1970-02-01 11:05`).valueOf()],
           },
           ],
           backgroundColor: [
@@ -347,19 +358,24 @@ export class InstrumentsComponent implements AfterViewInit {
           //     }
           //   }
           // }
-          // y: {
-          //   type: "timeseries",
-          //   time: {
-          //     displayFormats: {
-          //       hour: "hA"
-          //     }
-          //   },
-          //   display: true,
-          //   // ticks: {
-          //   //   reverse: true
-          //   // },
-          //   // gridLines: { display: false }
-          // }
+          y: {
+            //type: 'time',
+            position: 'left',
+            beginAtZero: false,
+            //min: moment('1970-02-01 00:00:00').valueOf(),
+            //max: moment('1970-02-01 23:59:59').valueOf(),
+            ticks: {
+              stepSize: 3.6e+6,
+              callback: value => {
+                let date = moment(value);
+                if (date.diff(moment('1970-02-01 23:59:59'), 'minutes') === 0) {
+                  return null;
+                }
+
+                return date.format('HH:mm');
+              }
+            }
+          }
         }
       }
     });
