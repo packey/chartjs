@@ -25,9 +25,8 @@ export class InstrumentsComponent implements AfterViewInit {
   tmpLab: any;
   data: any;
 
-  labels: any[] = [];
-  DATA_COUNT = 7;
-  NUMBER_CFG = { count: this.DATA_COUNT, min: -100, max: 100 };
+  days: any[] = [];
+  backgroundColors: any[] = [];
 
   mockUpChart = [
     {
@@ -87,103 +86,103 @@ export class InstrumentsComponent implements AfterViewInit {
       rows: [
         {
           _0: "2023-02-24",
-          _1: "",
-          _2: "",
+          _1: "00:22",
+          _2: "00:45",
           _3: "",
           _4: "",
+          _5: "start",
         },
         {
           _0: "2023-02-25",
-          _1: "",
-          _2: "",
+          _1: "05:53",
+          _2: "06:44",
           _3: "",
           _4: "",
+          _5: "idle",
         },
         {
           _0: "2023-02-26",
-          _1: "",
-          _2: "",
+          _1: "06:55",
+          _2: "07:25",
           _3: "",
           _4: "",
+          _5: "idle",
         },
         {
           _0: "2023-02-26",
-          _1: "",
-          _2: "",
+          _1: "09:23",
+          _2: "09:55",
           _3: "",
           _4: "",
           _5: "running",
         },
         {
           _0: "2023-02-26",
-          _1: "",
-          _2: "",
+          _1: "11:43",
+          _2: "11:59",
           _3: "",
           _4: "",
           _5: "pause",
         },
         {
           _0: "2023-02-26",
-          _1: "",
-          _2: "",
+          _1: "15:45",
+          _2: "16:42",
           _3: "",
           _4: "",
           _5: "idle",
         },
         {
           _0: "2023-02-26",
-          _1: "03:43",
-          _2: "03:43",
+          _1: "02:23",
+          _2: "03:25",
           _3: "test_run",
           _4: "",
           _5: "idle",
         },
         {
           _0: "2023-02-26",
-          _1: "03:43",
-          _2: "03:55",
+          _1: "03:45",
+          _2: "04:55",
           _3: "test_run",
           _4: "unknown",
           _5: "running",
         },
         {
           _0: "2023-02-27",
-          _1: "",
-          _2: "",
+          _1: "11:45",
+          _2: "12:15",
           _3: "",
           _4: "",
+          _5: "start",
         },
         {
           _0: "2023-02-28",
-          _1: "",
-          _2: "",
+          _1: "15:44",
+          _2: "18:20",
           _3: "",
           _4: "",
+          _5: "",
         },
         {
           _0: "2023-03-01",
-          _1: "",
-          _2: "",
+          _1: "11:02",
+          _2: "12:33",
           _3: "",
           _4: "",
+          _5: "idle",
         },
         {
           _0: "2023-03-02",
-          _1: "",
-          _2: "",
+          _1: "18:22",
+          _2: "19:21",
           _3: "",
           _4: "",
+          _5: "running",
         },
       ],
     },
   ];
-
-
-
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-
-
 
   instruments = [
     { id: '1', serialNumber: '2121352006', alias: 'Spike 1' },
@@ -211,8 +210,8 @@ export class InstrumentsComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.instrumentsDataSource.sort = this.sort;
     this.instrumentsDataSource.paginator = this.paginator;
-    this.barChartMethod();
     this.barChartTemp();
+    this.barChartMethod();
   }
 
   barChartTemp() {
@@ -223,20 +222,36 @@ export class InstrumentsComponent implements AfterViewInit {
     });
     this.tmpLab.forEach((el: any) => {
       if (el._0 != undefined && el._0 != null) {
-        if (!this.labels.includes(el._0)) {
-          // ✅ only runs if value not in array
-          this.labels.push(el._0);
+        if (!this.days.includes(el._0)) {
+          this.days.push(el._0);
+        }
+      }
+
+      if (el._5 != undefined && el._5 != null) {
+        switch (el._5) {
+          case "idle":
+            this.backgroundColors.push("rgb(255,255,102,0.4)"); //yellow
+            break;
+          case "start":
+            this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
+            break;
+          case "pause":
+            this.backgroundColors.push("rgb(255,153,51,0.4)"); //orange
+            break;
+          case "running":
+            this.backgroundColors.push("rgb(51,153,255,0.4)"); //blue
+            break;
+          case "":
+            this.backgroundColors.push("rgb(255,255,255,0)"); //white
+            break;
+          default:
+            this.backgroundColors.push("rgb(255,255,255,0)"); //white
+            break;
         }
       }
     });
     console.log("tmpLab ", this.tmpLab);
-    console.log("lables", this.labels);
-
-    // this.data = years.map((year, index) => ({
-    //   x: moment(`${year}-01-01`),
-    //   y: moment(`1970-02-01 ${times[index]}`).valueOf()
-    // }));
-
+    console.log("lables", this.days);
     // data = {
     //   labels: labels,
     //   datasets: [
@@ -257,88 +272,66 @@ export class InstrumentsComponent implements AfterViewInit {
     //     },
     //   ]
     // };
+    // console.log("tmpLab ", this.tmpLab);
+    // console.log("lables", this.days);
+    // console.log("backgroundColors", this.backgroundColors);
+
+    this.data = this.tmpLab.map((item: any) => ({
+      x: item._0,
+      //y: [item._1, item._2],
+      y: [moment(`1970-02-01 ${item._1}`).valueOf(), moment(`1970-02-01 ${item._2}`).valueOf()]
+    }));
+    //console.log("Data", this.data);
   }
 
   barChartMethod() {
     this.barChart = new Chart(this.barCanvas?.nativeElement, {
-      // type: 'bar',
-      // data: {
-      //   labels: ['BJP', 'INC', 'AAP', 'CPI', 'CPI-M', 'NCP'],
-      //   datasets: [
-      //     {
-      //       label: '# of Votes',
-      //       //data: ['00:00', '04:00', '08:00', '12:00', '16:00', '20:00'],
-      //       data: [200, 50, 30, 15, 20, 34],
-      //       backgroundColor: [
-      //         'rgba(255, 99, 132, 0.2)',
-      //         'rgba(54, 162, 235, 0.2)',
-      //         'rgba(255, 206, 86, 0.2)',
-      //         'rgba(75, 192, 192, 0.2)',
-      //         'rgba(153, 102, 255, 0.2)',
-      //         'rgba(255, 159, 64, 0.2)',
-      //       ],
-      //       borderColor: [
-      //         'rgba(255,99,132,1)',
-      //         'rgba(54, 162, 235, 1)',
-      //         'rgba(255, 206, 86, 1)',
-      //         'rgba(75, 192, 192, 1)',
-      //         'rgba(153, 102, 255, 1)',
-      //         'rgba(255, 159, 64, 1)',
-      //       ],
-      //       borderWidth: 1,
-      //     },
-      //   ],
-      // },
-      // options: {
-      //   scales: {
-      //     y: {
-      //       beginAtZero: true,
-      //     },
-      //   },
-      // },
-
       type: 'bar',
       data: {
         datasets: [{
-          label: '# of Votes',
-          data: [{
-            x: '2021-11-06',
-            //y: [1526652800, 1626652800],
-            y: [moment(`1970-02-01 11:45`).valueOf(), moment(`1970-02-01 11:55`).valueOf()],
-          }, {
-            x: '2021-11-07',
-            //y: [927862400, 1006652800],
-            y: [moment(`1970-02-01 13:35`).valueOf(), moment(`1970-02-01 14:55`).valueOf()],
-          }, {
-            x: '2021-11-07',
-            // y: [327862400, 527862400],
-            y: [moment(`1970-02-01 16:45`).valueOf(), moment(`1970-02-01 17:15`).valueOf()],
-          },
-          {
-            x: '2021-11-07',
-            // y: [1337862400, 1447862400],
-            y: [moment(`1970-02-01 10:45`).valueOf(), moment(`1970-02-01 11:05`).valueOf()],
-          },
-          ],
-          backgroundColor: [
-            'rgba(255, 99, 132, 0.2)',
-            'rgba(54, 162, 235, 0.2)',
-            'rgba(255, 206, 86, 0.2)',
-            'rgba(75, 192, 192, 0.2)',
-          ],
-          borderColor: [
-            'rgba(255,99,132,1)',
-            'rgba(54, 162, 235, 1)',
-            'rgba(255, 206, 86, 1)',
-            'rgba(75, 192, 192, 1)',
-          ],
-          borderWidth: 1,
+          label: 'Test',
+          data: this.data,
+          // data: [{
+          //   x: '2021-11-06',
+          //   //y: [1526652800, 1626652800],
+          //   y: [moment(`1970-02-01 11:45`).valueOf(), moment(`1970-02-01 11:55`).valueOf()],
+          // }, {
+          //   x: '2021-11-07',
+          //   //y: [927862400, 1006652800],
+          //   y: [moment(`1970-02-01 13:35`).valueOf(), moment(`1970-02-01 14:55`).valueOf()],
+          // }, {
+          //   x: '2021-11-07',
+          //   // y: [327862400, 527862400],
+          //   y: [moment(`1970-02-01 16:45`).valueOf(), moment(`1970-02-01 17:15`).valueOf()],
+          // },
+          // {
+          //   x: '2021-11-07',
+          //   // y: [1337862400, 1447862400],
+          //   y: [moment(`1970-02-01 10:45`).valueOf(), moment(`1970-02-01 11:05`).valueOf()],
+          // },
+          // ],
+          backgroundColor: this.backgroundColors
+          // backgroundColor: [
+          //   'rgba(255, 99, 132, 0.2)',
+          //   'rgba(54, 162, 235, 0.2)',
+          //   'rgba(255, 206, 86, 0.2)',
+          //   'rgba(75, 192, 192, 0.2)',
+          // ],
+          // borderColor: [
+          //   'rgba(255,99,132,1)',
+          //   'rgba(54, 162, 235, 1)',
+          //   'rgba(255, 206, 86, 1)',
+          //   'rgba(75, 192, 192, 1)',
+          // ],
+          // borderWidth: 1,
         }],
       },
       options: {
+        responsive: true,
+        //label: 'st',
         scales: {
           x: {
-            min: '2021-11-07',
+            //min: '2021-11-07',
           },
           // y:
           // {
@@ -358,9 +351,10 @@ export class InstrumentsComponent implements AfterViewInit {
           //     }
           //   }
           // }
+
           y: {
             //type: 'time',
-            position: 'left',
+            //position: 'left',
             beginAtZero: false,
             //min: moment('1970-02-01 00:00:00').valueOf(),
             //max: moment('1970-02-01 23:59:59').valueOf(),
