@@ -9,6 +9,7 @@ import { ROUTES } from '~shared/constants/routes';
 import { DefaultRouteGuard } from '~shared/guards/default-route.guard';
 import { PermissionGuard } from '~shared/guards/permission.guard';
 import { SilentAuthGuard } from '~shared/guards/silent-auth.guard';
+import { ChartComponent } from './features/chart/chart.component';
 
 const routes: Routes = [
   {
@@ -43,9 +44,7 @@ const routes: Routes = [
       },
       {
         path: ROUTES.CHART.path,
-        // Disable permissions until we have the roles for the user
-        // canActivate: [PermissionGuard],
-        loadChildren: () => import('~instruments/chart.module').then(m => m.ChartModule),
+        component: ChartComponent,
         data: {
           permission: ROUTES.CHART.permission
         }

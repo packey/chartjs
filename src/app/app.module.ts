@@ -25,9 +25,10 @@ import { PaginatorI18nService } from '~shared/i18n/paginator-i18n.service';
 import { createTranslateLoader } from '~shared/i18n/translate-loader-factory';
 import { LocaleService } from '~shared/services/locale.service';
 import { SharedModule } from '~shared/shared.module';
+import { ChartComponent } from './features/chart/chart.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ChartComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
