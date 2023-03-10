@@ -165,8 +165,8 @@ export class ChartComponent implements AfterViewInit {
       Date: "2023-01-04",
       Runs: {
         Name: "Run abc",
-        StartTime: "2023-01-04 01:00",
-        EndTime: "2023-01-04 05:00",
+        StartTime: "2023-01-02 23:00",
+        EndTime: "2023-01-03 01:00",
         Methods: [
           {
             Name: "",
@@ -184,7 +184,6 @@ export class ChartComponent implements AfterViewInit {
   constructor() { }
 
   ngAfterViewInit() {
-
     this.barChartMethod();
   }
 
@@ -200,7 +199,7 @@ export class ChartComponent implements AfterViewInit {
     this.mockUpChart.forEach(element => {
       //da se popuni za svaki dan svi termini...
       this.allDaysTime.forEach(allDays => {
-        console.log("allDays", allDays);
+        //console.log("allDays", allDays);
         var tmpDate = {
           date: element.Date,
           startTime: `${element.Date} ${allDays.StartTime}`,
@@ -215,7 +214,7 @@ export class ChartComponent implements AfterViewInit {
         this.backgroundColors.push("rgb(255,255,255,0)"); //white
         this.chartYvalues.push(tmpDate);
         //this.chartYvalues.push(tmpRun1);
-        console.log("tmpDate", tmpDate);
+        //console.log("tmpDate", tmpDate);
       });
       // this.allDaysTime.forEach(allDays => {
       // var tmpRun = {
@@ -248,28 +247,31 @@ export class ChartComponent implements AfterViewInit {
           startTime: el.StartTime,
           endTime: el.EndTime
         }
-        this.chartYvalues.push(tmpRun);
-        this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
-      } else {
-        //this.allDaysTime.forEach(allDays => {
-        // console.log("el", el);
-        // var tmpDate = {
-        //   date: el.Date,
-        //   startTime: `${el.Date} 00:00`,
-        //   endTime: `${el.Date} 01:00`
-        // }
-        // this.backgroundColors.push("rgb(255,255,255,0)"); //white
-        // console.log("tmpDate", tmpDate);
-        // this.chartYvalues.push(tmpDate);
-        //});
-        // var tmpDate = {
-        //   date: el.Date,
-        //   startTime: el.StartTime,
-        //   endTime: el.EndTime
-        // }
-        // this.chartYvalues.push(tmpRun);
-        // this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
+        if (this.separateDate(el.StartTime)[0] != this.separateDate(el.EndTime)[0]) {
+          var startDate = {
+            date: this.separateDate(el.StartTime)[0],
+            startTime: el.StartTime,
+            endTime: `${this.separateDate(el.StartTime)[0]} 23:59`
+          }
+          var endDate = {
+            date: this.separateDate(el.EndTime)[0],
+            startTime: `${this.separateDate(el.EndTime)[0]} 00:00`,
+            endTime: el.EndTime
+          }
+          this.chartYvalues.push(startDate);
+          this.chartYvalues.push(endDate);
+          this.backgroundColors.push("rgb(240,56,43,0.4)");
+          this.backgroundColors.push("rgb(240,56,43,0.4)");
+          //console.log("Pocinje u jedan, zavrsava se u drugi dan");
+          //console.log("Start date", el.StartTime);
+          //console.log("End date", el.EndTime);
+        } else {
+          this.chartYvalues.push(tmpRun);
+          this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
+        }
+
       }
+
       if (el.Pauses != undefined && el.Pauses != null) {
         if (el.Pauses.length > 0) {
           //ako postoje pauze da ih ubaci u niz gde treba da se prikazu rezultati po y osu - da prikaze i pauze
@@ -343,21 +345,33 @@ export class ChartComponent implements AfterViewInit {
             //min: '2021-11-07',
           },
           y: {
-            beginAtZero: false,
+            //beginAtZero: false,
+            // title: {
+            //   display: true,
+            //   text: 'value'
+            // },
+            min: moment('1970-02-01 00:00:00').valueOf(),
+            //max: moment('1970-02-01 23:59:59').valueOf(),
             ticks: {
               stepSize: 3.6e+6,
               callback: value => {
                 let date = moment(value);
-                if (date.diff(moment('1970-02-01 23:59:59'), 'minutes') === 0) {
-                  return null;
-                }
+                // if (date.diff(moment('1970-02-01 23:59:59'), 'minutes') === 0) {
+                //   return null;
+                // }
 
                 return date.format('HH:mm');
               }
             }
           }
+        },
+        plugins: {
+          tooltip: {
+            enabled: false // <-- this option disables tooltips
+          }
         }
-      }
+      },
+
     });
   }
 }
