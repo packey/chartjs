@@ -17,6 +17,11 @@ export class ChartComponent implements AfterViewInit {
 
   chartYvalues: any[] = [];
   backgroundColors: any[] = [];
+  runsColor = "rgb(51,204,51,0.4)"; //green
+  pauseColor = "rgb(255,255,102,1)"; //yellow
+  methodColor = "rgb(61,157,242,0.4)"; //blue
+  twoDaysColor = "rgb(240,56,43,0.4)"; //red
+  defaultColor = "rgb(255,255,255,0)"; //white
 
   allDaysTime =
     [
@@ -118,7 +123,6 @@ export class ChartComponent implements AfterViewInit {
       }
     ];
 
-
   mockUpChart = [
     {
       Date: "2023-01-01",
@@ -142,6 +146,52 @@ export class ChartComponent implements AfterViewInit {
       }
     },
     {
+      Date: "2023-01-01",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-01 07:00",
+        EndTime: "2023-01-01 11:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: "2023-01-01 08:00",
+            EndTime: "2023-01-01 08:40",
+          },
+          {
+            StartTime: "2023-01-01 09:40",
+            EndTime: "2023-01-01 10:20",
+          }
+        ]
+      }
+    },
+    {
+      Date: "2023-01-01",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-01 16:00",
+        EndTime: "2023-01-01 22:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: "2023-01-01 18:00",
+            EndTime: "2023-01-01 20:00",
+          }
+        ]
+      }
+    },
+    {
       Date: "2023-01-02",
       Runs: {
         Name: "Run abc",
@@ -158,11 +208,75 @@ export class ChartComponent implements AfterViewInit {
       }
     },
     {
+      Date: "2023-01-02",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-02 06:00",
+        EndTime: "2023-01-02 12:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-02",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-02 14:00",
+        EndTime: "2023-01-02 20:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
       Date: "2023-01-03",
       Runs: []
     },
     {
-      Date: "2023-01-04",
+      Date: "2023-01-03",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-03 22:00",
+        EndTime: "2023-01-04 02:30",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-03",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-03 15:00",
+        EndTime: "2023-01-03 17:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-03",
       Runs: {
         Name: "Run abc",
         StartTime: "2023-01-02 23:00",
@@ -176,10 +290,208 @@ export class ChartComponent implements AfterViewInit {
         ],
         Pauses: []
       }
-    }
+    },
+    {
+      Date: "2023-01-04",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-04 03:20",
+        EndTime: "2023-01-04 04:20",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-05",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-05 01:00",
+        EndTime: "2023-01-05 02:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-06",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-06 03:00",
+        EndTime: "2023-01-06 04:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-06",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-06 13:00",
+        EndTime: "2023-01-06 20:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: "2023-01-01 15:00",
+            EndTime: "2023-01-01 17:00",
+          }
+        ]
+      }
+    },
+    {
+      Date: "2023-01-07",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-07 08:00",
+        EndTime: "2023-01-07 09:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-07",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-07 11:00",
+        EndTime: "2023-01-07 20:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: "2023-01-01 13:00",
+            EndTime: "2023-01-01 14:30",
+          },
+          {
+            StartTime: "2023-01-01 18:00",
+            EndTime: "2023-01-01 19:30",
+          }
+        ]
+      }
+    },
+    {
+      Date: "2023-01-08",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-08 10:00",
+        EndTime: "2023-01-08 11:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-09",
+      Runs: []
+    },
+    {
+      Date: "2023-01-10",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-10 15:20",
+        EndTime: "2023-01-10 17:20",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-11",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-10 21:20",
+        EndTime: "2023-01-11 04:20",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "",
+            EndTime: ""
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-12",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-12 02:20",
+        EndTime: "2023-01-12 18:20",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "2023-01-12 08:00",
+            EndTime: "2023-01-12 10:20"
+          },
+          {
+            Name: "",
+            StartTime: "2023-01-12 15:20",
+            EndTime: "2023-01-12 17:20"
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: "2023-01-12",
+      Runs: {
+        Name: "Run abc",
+        StartTime: "2023-01-12 20:00",
+        EndTime: "2023-01-12 23:00",
+        Methods: [
+          {
+            Name: "",
+            StartTime: "2023-01-12 21:30",
+            EndTime: "2023-01-12 22:10"
+          }
+        ],
+        Pauses: []
+      }
+    },
 
   ];
-
 
   constructor() { }
 
@@ -195,58 +507,31 @@ export class ChartComponent implements AfterViewInit {
   }
 
   barChartTemp() {
-
     this.mockUpChart.forEach(element => {
-      //da se popuni za svaki dan svi termini...
+      //fill in all intervals for each day - required for days that do not have intervals
       this.allDaysTime.forEach(allDays => {
-        //console.log("allDays", allDays);
         var tmpDate = {
           date: element.Date,
           startTime: `${element.Date} ${allDays.StartTime}`,
-          endTime: `${element.Date} ${allDays.EndTime}`,//`${element.Date} 01:00`
+          endTime: `${element.Date} ${allDays.EndTime}`,
         }
-        // var tmpRun1 = {
-        //   date: element.Date,
-        //   startTime: `${element.Date} 05:00`,
-        //   endTime: `${element.Date} 06:00`
-        // }
-        //this.backgroundColors.push("rgb(255,255,255,0)"); //white
-        this.backgroundColors.push("rgb(255,255,255,0)"); //white
+        this.backgroundColors.push(this.defaultColor); //white
         this.chartYvalues.push(tmpDate);
-        //this.chartYvalues.push(tmpRun1);
-        //console.log("tmpDate", tmpDate);
       });
-      // this.allDaysTime.forEach(allDays => {
-      // var tmpRun = {
-      //   date: element.Date,
-      //   startTime: `${element.Date} 00:00`,
-      //   endTime: `${element.Date} 01:00`
-      // }
-      // var tmpRun1 = {
-      //   date: element.Date,
-      //   startTime: `${element.Date} 05:00`,
-      //   endTime: `${element.Date} 0:00`
-      // }
-      // this.backgroundColors.push("rgb(255,255,255,0)"); //white
-      // this.backgroundColors.push("rgb(255,255,255,0)"); //white
-      // this.chartYvalues.push(tmpRun);
-      // this.chartYvalues.push(tmpRun1);
-      // console.log("tmpDate", tmpRun);
-      // });
       if (element.Runs != undefined && element.Runs != null) {
-        //if (element.Runs != undefined && element.Runs['Pauses'] != null) {
         this.tmpChartElement.push(element.Runs);
-        //}
       }
     });
+
     this.tmpChartElement.forEach((el: any) => {
-      //da se spremi prvo deo koji se odnosi na Run za y osu
+      //preparing runs element
       if (el.StartTime != undefined && el.StartTime != null) {
         var tmpRun = {
           date: this.separateDate(el.StartTime)[0],
           startTime: el.StartTime,
           endTime: el.EndTime
         }
+        //checking for start interval on the first day and ending on the second day
         if (this.separateDate(el.StartTime)[0] != this.separateDate(el.EndTime)[0]) {
           var startDate = {
             date: this.separateDate(el.StartTime)[0],
@@ -259,22 +544,20 @@ export class ChartComponent implements AfterViewInit {
             endTime: el.EndTime
           }
           this.chartYvalues.push(startDate);
+          this.backgroundColors.push(this.twoDaysColor);
           this.chartYvalues.push(endDate);
-          this.backgroundColors.push("rgb(240,56,43,0.4)");
-          this.backgroundColors.push("rgb(240,56,43,0.4)");
-          //console.log("Pocinje u jedan, zavrsava se u drugi dan");
-          //console.log("Start date", el.StartTime);
-          //console.log("End date", el.EndTime);
+          this.backgroundColors.push(this.twoDaysColor);
         } else {
           this.chartYvalues.push(tmpRun);
-          this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
+          this.backgroundColors.push(this.runsColor); //green
         }
 
       }
 
+      //pauses
       if (el.Pauses != undefined && el.Pauses != null) {
         if (el.Pauses.length > 0) {
-          //ako postoje pauze da ih ubaci u niz gde treba da se prikazu rezultati po y osu - da prikaze i pauze
+          //if there are pauses insert them into the sequence where the result should be displayed by Y axis - to display the pauses as well
           el.Pauses.forEach((elPauses: any) => {
             if (elPauses.StartTime != undefined && elPauses.StartTime != null && elPauses.EndTime != undefined && elPauses.EndTime != null) {
               var tmpPauses = {
@@ -283,42 +566,30 @@ export class ChartComponent implements AfterViewInit {
                 endTime: elPauses.EndTime
               }
               this.chartYvalues.push(tmpPauses);
-              this.backgroundColors.push("rgb(255,255,102,1)"); //yellow
+              this.backgroundColors.push(this.pauseColor); //yellow
             }
           });
-          //if (!this.pauses.includes(el._0)) {
-
-
-          //}
         }
       }
 
-
-      // if (el._5 != undefined && el._5 != null) {
-      //   switch (el._5) {
-      //     case "idle":
-      //       this.backgroundColors.push("rgb(255,255,102,0.4)"); //yellow
-      //       break;
-      //     case "start":
-      //       this.backgroundColors.push("rgb(51,204,51,0.4)"); //green
-      //       break;
-      //     case "pause":
-      //       this.backgroundColors.push("rgb(255,153,51,0.4)"); //orange
-      //       break;
-      //     case "running":
-      //       this.backgroundColors.push("rgb(51,153,255,0.4)"); //blue
-      //       break;
-      //     case "":
-      //       this.backgroundColors.push("rgb(255,255,255,0)"); //white
-      //       break;
-      //     default:
-      //       this.backgroundColors.push("rgb(255,255,255,0)"); //white
-      //       break;
-      //   }
-      // }
+      //methods
+      if (el.Methods != undefined && el.Methods != null) {
+        if (el.Methods.length > 0) {
+          //if there are methods insert them into the sequence where the result should be displayed by Y axis - to display the pauses as well
+          el.Methods.forEach((elMethods: any) => {
+            if (elMethods.StartTime != undefined && elMethods.StartTime != null && elMethods.EndTime != undefined && elMethods.EndTime != null) {
+              var tmpPauses = {
+                date: this.separateDate(el.StartTime)[0],
+                startTime: elMethods.StartTime,
+                endTime: elMethods.EndTime
+              }
+              this.chartYvalues.push(tmpPauses);
+              this.backgroundColors.push(this.methodColor); //blue
+            }
+          });
+        }
+      }
     });
-    console.log("Y values", this.chartYvalues);
-    console.log("BackgroundColors", this.backgroundColors);
 
     this.data = this.chartYvalues.map((item: any) => ({
       x: item.date,
@@ -345,11 +616,6 @@ export class ChartComponent implements AfterViewInit {
             //min: '2021-11-07',
           },
           y: {
-            //beginAtZero: false,
-            // title: {
-            //   display: true,
-            //   text: 'value'
-            // },
             min: moment('1970-02-01 00:00:00').valueOf(),
             //max: moment('1970-02-01 23:59:59').valueOf(),
             ticks: {
@@ -359,7 +625,6 @@ export class ChartComponent implements AfterViewInit {
                 // if (date.diff(moment('1970-02-01 23:59:59'), 'minutes') === 0) {
                 //   return null;
                 // }
-
                 return date.format('HH:mm');
               }
             }
