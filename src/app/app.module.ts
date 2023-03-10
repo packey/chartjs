@@ -26,9 +26,10 @@ import { createTranslateLoader } from '~shared/i18n/translate-loader-factory';
 import { LocaleService } from '~shared/services/locale.service';
 import { SharedModule } from '~shared/shared.module';
 import { ChartComponent } from './features/chart/chart.component';
+import { TestcomponentComponent } from './features/testcomponent/testcomponent.component';
 
 @NgModule({
-  declarations: [AppComponent, ChartComponent],
+  declarations: [AppComponent, ChartComponent, TestcomponentComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
