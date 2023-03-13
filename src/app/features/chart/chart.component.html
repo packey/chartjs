@@ -1,6 +1,17 @@
-<div class="instruments">
-  <div>
-    <h1>Bar Chart</h1>
+<div class="charts">
+  <div class="charts-body overflow-container">
+    <section class="filter">
+      <tec-dropdown style="width: 280px" data-e2e="filter-by-date" formControlName="filterByDate"
+        [label]="'charts.filterDate' | translate" leadingIcon="Filter" [items]="filterByDate"
+        (selectItem)="filterDate($event)" [isMultiple]="false">
+      </tec-dropdown>
+      <tec-date-range-picker *ngIf="showCustomRange" style="width: 280px" [label]="'charts.customRange' | translate"
+        [cancelLabel]="'shared.others.cancel' | translate" [applyLabel]="'shared.others.apply' | translate"
+        leadingIcon="Calendar" trailingIcon="" formControlName="dateRange" (valueChange)="customRange($event)"
+        data-e2e="date-picker-filter"></tec-date-range-picker>
+    </section>
+
+    <h1>{{ 'charts.title' | translate }}</h1>
     <canvas #barCanvas style="height:10vh; width:20vw"></canvas>
     <hr color="red">
   </div>

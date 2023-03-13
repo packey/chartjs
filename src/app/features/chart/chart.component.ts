@@ -1,5 +1,7 @@
 import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { DropdownItem, TecDropdownComponent, TecDateRangePickerComponent, TecDateRangePickerValue } from '@tecan/ui';
 import { Chart } from 'chart.js/auto';
+
 import moment from 'moment';
 
 @Component({
@@ -21,6 +23,25 @@ export class ChartComponent implements AfterViewInit {
   methodColor = 'rgb(61,157,242,0.4)'; //blue
   twoDaysColor = 'rgb(240,56,43,0.4)'; //red
   defaultColor = 'rgb(255,255,255,0)'; //white
+
+
+  //added options for filter dropdown
+  filterByDate = [
+    {
+      label: "Last week",
+      value: "1",
+    },
+    {
+      label: "Last month",
+      value: "2",
+    },
+    {
+      label: "Custom range",
+      value: "3",
+    }
+  ]
+
+  showCustomRange = false; //flag for show/hide custom range
 
   allDaysTime = [
     {
@@ -245,56 +266,8 @@ export class ChartComponent implements AfterViewInit {
       Date: '2023-01-03',
       Runs: {
         Name: 'Run abc',
-        StartTime: '2023-01-03 22:00',
-        EndTime: '2023-01-04 02:30',
-        Methods: [
-          {
-            Name: '',
-            StartTime: '',
-            EndTime: ''
-          }
-        ],
-        Pauses: []
-      }
-    },
-    {
-      Date: '2023-01-03',
-      Runs: {
-        Name: 'Run abc',
-        StartTime: '2023-01-03 15:00',
-        EndTime: '2023-01-03 17:00',
-        Methods: [
-          {
-            Name: '',
-            StartTime: '',
-            EndTime: ''
-          }
-        ],
-        Pauses: []
-      }
-    },
-    {
-      Date: '2023-01-03',
-      Runs: {
-        Name: 'Run abc',
         StartTime: '2023-01-02 23:00',
         EndTime: '2023-01-03 01:00',
-        Methods: [
-          {
-            Name: '',
-            StartTime: '',
-            EndTime: ''
-          }
-        ],
-        Pauses: []
-      }
-    },
-    {
-      Date: '2023-01-04',
-      Runs: {
-        Name: 'Run abc',
-        StartTime: '2023-01-04 03:20',
-        EndTime: '2023-01-04 04:20',
         Methods: [
           {
             Name: '',
@@ -337,27 +310,7 @@ export class ChartComponent implements AfterViewInit {
         Pauses: []
       }
     },
-    {
-      Date: '2023-01-06',
-      Runs: {
-        Name: 'Run abc',
-        StartTime: '2023-01-06 13:00',
-        EndTime: '2023-01-06 20:00',
-        Methods: [
-          {
-            Name: '',
-            StartTime: '',
-            EndTime: ''
-          }
-        ],
-        Pauses: [
-          {
-            StartTime: '2023-01-01 15:00',
-            EndTime: '2023-01-01 17:00'
-          }
-        ]
-      }
-    },
+
     {
       Date: '2023-01-07',
       Runs: {
@@ -374,31 +327,7 @@ export class ChartComponent implements AfterViewInit {
         Pauses: []
       }
     },
-    {
-      Date: '2023-01-07',
-      Runs: {
-        Name: 'Run abc',
-        StartTime: '2023-01-07 11:00',
-        EndTime: '2023-01-07 20:00',
-        Methods: [
-          {
-            Name: '',
-            StartTime: '',
-            EndTime: ''
-          }
-        ],
-        Pauses: [
-          {
-            StartTime: '2023-01-01 13:00',
-            EndTime: '2023-01-01 14:30'
-          },
-          {
-            StartTime: '2023-01-01 18:00',
-            EndTime: '2023-01-01 19:30'
-          }
-        ]
-      }
-    },
+
     {
       Date: '2023-01-08',
       Runs: {
@@ -487,6 +416,100 @@ export class ChartComponent implements AfterViewInit {
         ],
         Pauses: []
       }
+    },
+    {
+      Date: '2023-02-03',
+      Runs: {
+        Name: 'Run abc',
+        StartTime: '2023-02-03 22:00',
+        EndTime: '2023-02-04 02:30',
+        Methods: [
+          {
+            Name: '',
+            StartTime: '',
+            EndTime: ''
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: '2023-02-03',
+      Runs: {
+        Name: 'Run abc',
+        StartTime: '2023-02-03 15:00',
+        EndTime: '2023-02-03 17:00',
+        Methods: [
+          {
+            Name: '',
+            StartTime: '',
+            EndTime: ''
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: '2023-02-04',
+      Runs: {
+        Name: 'Run abc',
+        StartTime: '2023-02-04 03:20',
+        EndTime: '2023-02-04 04:20',
+        Methods: [
+          {
+            Name: '',
+            StartTime: '',
+            EndTime: ''
+          }
+        ],
+        Pauses: []
+      }
+    },
+    {
+      Date: '2023-02-06',
+      Runs: {
+        Name: 'Run abc',
+        StartTime: '2023-02-06 13:00',
+        EndTime: '2023-02-06 20:00',
+        Methods: [
+          {
+            Name: '',
+            StartTime: '',
+            EndTime: ''
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: '2023-02-06 15:00',
+            EndTime: '2023-02-06 17:00'
+          }
+        ]
+      }
+    },
+    {
+      Date: '2023-02-07',
+      Runs: {
+        Name: 'Run abc',
+        StartTime: '2023-02-07 11:00',
+        EndTime: '2023-02-07 20:00',
+        Methods: [
+          {
+            Name: '',
+            StartTime: '',
+            EndTime: ''
+          }
+        ],
+        Pauses: [
+          {
+            StartTime: '2023-02-07 13:00',
+            EndTime: '2023-02-07 14:30'
+          },
+          {
+            StartTime: '2023-02-07 18:00',
+            EndTime: '2023-02-07 19:30'
+          }
+        ]
+      }
     }
   ];
 
@@ -494,6 +517,22 @@ export class ChartComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.barChartMethod();
+  }
+
+  //method for filtering date
+  filterDate(item: DropdownItem) {
+    console.log("Selected Item", item);
+    if (item.value === "3") {
+      this.showCustomRange = true;
+      console.log("show custom range", this.showCustomRange);
+    } else {
+      this.showCustomRange = false;
+    }
+  }
+
+  //method for custom range
+  customRange(item: TecDateRangePickerValue) {
+    console.log("Custom Range selected", item);
   }
 
   separateDate(date: string): { date: string; time: string } {
@@ -603,7 +642,6 @@ export class ChartComponent implements AfterViewInit {
         moment(`1970-02-01 ${this.separateDate(item.endTime).time}`).valueOf()
       ]
     }));
-    console.log('data', this.data);
   }
 
   barChartMethod() {

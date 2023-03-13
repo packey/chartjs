@@ -23,6 +23,10 @@
       "firstPage": "First page",
       "lastPage": "Last page",
       "range": "Page {{page}} of {{totalPages}}"
+    },
+    "others": {
+      "cancel": "Cancel",
+      "apply": "Apply"
     }
   },
 
@@ -45,5 +49,11 @@
 
   "instruments": {
     "title": "Instruments"
+  },
+
+  "charts": {
+    "title": "Mockup Chart",
+    "filterDate": "Filter Date",
+    "customRange": "Custom Range"
   }
 }

@@ -1,6 +1,6 @@
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
-import { MATERIAL_SANITY_CHECKS } from '@angular/material/core';
+import { DateAdapter, MATERIAL_SANITY_CHECKS, MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatPaginatorIntl } from '@angular/material/paginator';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -9,7 +9,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { MissingTranslationHandler, TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TecTranslateService } from '@tecan/ui';
+import { TecNativeDateAdapter, TecTranslateService, TEC_NATIVE_DATE_FORMATS } from '@tecan/ui';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 
@@ -83,6 +83,14 @@ import { TestcomponentComponent } from './features/testcomponent/testcomponent.c
         theme: false,
         version: true
       }
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: TEC_NATIVE_DATE_FORMATS
+    },
+    {
+      provide: DateAdapter,
+      useClass: TecNativeDateAdapter
     }
   ],
   bootstrap: [AppComponent]

@@ -23,6 +23,10 @@
       "firstPage": "Erste Seite",
       "lastPage": "Letzte Seite",
       "range": "Seite {{page}} von {{totalPages}}"
+    },
+    "others": {
+      "cancel": "Abbrechen",
+      "apply": "Bewerben"
     }
   },
 
@@ -45,5 +49,11 @@
 
   "instruments": {
     "title": "Instrumente"
+  },
+
+  "charts": {
+    "title": "Mockup-Diagramm",
+    "filterDate": "Datum filtern",
+    "customRange": "Benutzerdefinierten Bereich"
   }
 }
