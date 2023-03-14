@@ -9,6 +9,7 @@
         "createDefaultProgram": true
       },
       "extends": [
+		"@typescript-esling/parser"
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates",
         "prettier"

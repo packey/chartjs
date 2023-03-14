@@ -31,7 +31,7 @@
             "stylePreprocessorOptions": {
               "includePaths": ["src/styles"]
             },
-            "allowedCommonJsDependencies": ["deepmerge"],
+            "allowedCommonJsDependencies": ["deepmerge", "moment"],
             "outputPath": "dist/ignite-spa",
             "index": "src/index.html",
             "main": "src/main.ts",

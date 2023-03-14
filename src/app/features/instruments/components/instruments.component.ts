@@ -1,4 +1,4 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
@@ -7,8 +7,6 @@ import { TecToastService } from '@tecan/ui';
 
 import { ConfirmationDialogComponent } from '~shared/confirmation-dialog/confirmation-dialog.component';
 import { trackById } from '~shared/helpers/track-by.helper';
-import Chart from 'chart.js/auto'
-import moment from 'moment';
 
 @Component({
   selector: 'capp-instruments',
