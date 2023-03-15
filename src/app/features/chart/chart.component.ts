@@ -151,11 +151,11 @@ export class ChartComponent implements AfterViewInit {
   loadMockupData() {
     this.mockUpChart = [
       {
-        Date: '2023-01-17',
+        Date: '2023-01-10',
         Runs: {
           Name: 'Run abc',
-          StartTime: '2023-01-17 01:00',
-          EndTime: '2023-01-17 05:00',
+          StartTime: '2023-01-10 02:00',
+          EndTime: '2023-01-10 08:00',
           Methods: [
             {
               Name: '',
@@ -165,18 +165,18 @@ export class ChartComponent implements AfterViewInit {
           ],
           Pauses: [
             {
-              StartTime: '2023-01-17 01:00',
-              EndTime: '2023-01-17 02:00'
+              StartTime: '2023-01-10 03:00',
+              EndTime: '2023-01-10 04:00'
             }
           ]
         }
       },
       {
-        Date: '2023-01-17',
+        Date: '2023-01-11',
         Runs: {
           Name: 'Run abc',
-          StartTime: '2023-01-17 07:00',
-          EndTime: '2023-01-17 11:00',
+          StartTime: '2023-01-11 01:00',
+          EndTime: '2023-01-11 15:00',
           Methods: [
             {
               Name: '',
@@ -186,12 +186,117 @@ export class ChartComponent implements AfterViewInit {
           ],
           Pauses: [
             {
-              StartTime: '2023-01-17 08:00',
-              EndTime: '2023-01-17 08:40'
+              StartTime: '2023-01-11 05:00',
+              EndTime: '2023-01-11 06:00'
             },
             {
-              StartTime: '2023-01-17 09:40',
-              EndTime: '2023-01-17 10:20'
+              StartTime: '2023-01-11 11:00',
+              EndTime: '2023-01-11 12:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-01-12',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-01-12 01:00',
+          EndTime: '2023-01-12 05:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-01-12 01:00',
+              EndTime: '2023-01-12 02:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-01-13',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-01-13 11:00',
+          EndTime: '2023-01-13 17:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-01-13 13:00',
+              EndTime: '2023-01-13 13:40'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-01-14',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-01-14 01:00',
+          EndTime: '2023-01-14 05:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-01-14 01:00',
+              EndTime: '2023-01-14 02:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-01-15',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-01-15 09:00',
+          EndTime: '2023-01-15 19:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-01-15 11:00',
+              EndTime: '2023-01-15 12:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-01-16',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-01-16 09:00',
+          EndTime: '2023-01-16 13:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-01-16 11:00',
+              EndTime: '2023-01-16 12:00'
             }
           ]
         }
@@ -530,6 +635,194 @@ export class ChartComponent implements AfterViewInit {
             {
               StartTime: '2023-03-14 18:00',
               EndTime: '2023-03-14 19:30'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-15',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-15 15:00',
+          EndTime: '2023-03-15 22:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '2023-03-15 16:00',
+              EndTime: '2023-03-15 16:45'
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-15 19:00',
+              EndTime: '2023-03-15 20:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-16',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-16 11:00',
+          EndTime: '2023-03-16 20:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-16 13:00',
+              EndTime: '2023-03-16 14:30'
+            },
+            {
+              StartTime: '2023-03-16 18:00',
+              EndTime: '2023-03-16 19:30'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-17',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-17 03:00',
+          EndTime: '2023-03-17 20:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-17 05:00',
+              EndTime: '2023-03-17 07:00'
+            },
+            {
+              StartTime: '2023-03-17 15:00',
+              EndTime: '2023-03-17 17:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-18',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-18 09:00',
+          EndTime: '2023-03-18 21:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-18 10:00',
+              EndTime: '2023-03-18 12:30'
+            },
+            {
+              StartTime: '2023-03-18 18:00',
+              EndTime: '2023-03-18 19:30'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-19',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-19 12:00',
+          EndTime: '2023-03-19 19:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-19 15:00',
+              EndTime: '2023-03-19 17:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-20',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-20 01:00',
+          EndTime: '2023-03-20 19:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-20 13:00',
+              EndTime: '2023-03-20 15:30'
+            },
+            {
+              StartTime: '2023-03-20 17:00',
+              EndTime: '2023-03-20 18:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-21',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-21 12:00',
+          EndTime: '2023-03-21 18:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-21 15:00',
+              EndTime: '2023-03-21 17:00'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-22',
+        Runs: {
+          Name: 'Run abc',
+          StartTime: '2023-03-22 08:00',
+          EndTime: '2023-03-22 18:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-14 13:00',
+              EndTime: '2023-03-14 14:30'
+            },
+            {
+              StartTime: '2023-03-14 15:00',
+              EndTime: '2023-03-14 16:30'
             }
           ]
         }
