@@ -16,12 +16,16 @@ export class ChartComponent implements AfterViewInit {
   data: any;
 
   chartYvalues: any[] = [];
+  tmpLastWeekElements: any[] = [];
   backgroundColors: any[] = [];
-  runsColor = 'rgb(51,204,51,0.4)'; //green
+  runColor = 'rgb(51,204,51,0.4)'; //green
   pauseColor = 'rgb(255,255,102,1)'; //yellow
   methodColor = 'rgb(61,157,242,0.4)'; //blue
   twoDaysColor = 'rgb(240,56,43,0.4)'; //red
   defaultColor = 'rgb(255,255,255,0)'; //white
+
+  lastWeekFilter = false;
+  lastWeek: any;
 
   //added options for filter dropdown
   filterByDate = [
@@ -41,6 +45,7 @@ export class ChartComponent implements AfterViewInit {
 
   showCustomRange = false; //flag for show/hide custom range
   mockUpChart: any;
+
 
   allDaysTime = [
     {
@@ -152,7 +157,7 @@ export class ChartComponent implements AfterViewInit {
     this.mockUpChart = [
       {
         Date: '2023-01-10',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-10 02:00',
           EndTime: '2023-01-10 08:00',
@@ -173,7 +178,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-11',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-11 01:00',
           EndTime: '2023-01-11 15:00',
@@ -198,7 +203,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-12',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-12 01:00',
           EndTime: '2023-01-12 05:00',
@@ -219,7 +224,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-13',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-13 11:00',
           EndTime: '2023-01-13 17:00',
@@ -240,7 +245,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-14',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-14 01:00',
           EndTime: '2023-01-14 05:00',
@@ -261,7 +266,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-15',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-15 09:00',
           EndTime: '2023-01-15 19:00',
@@ -282,7 +287,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-16',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-16 09:00',
           EndTime: '2023-01-16 13:00',
@@ -303,7 +308,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-17',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-17 16:00',
           EndTime: '2023-01-17 22:00',
@@ -324,41 +329,9 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-01-18',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-01-18 01:00',
-          EndTime: '2023-01-18 05:00',
-          Methods: [
-            {
-              Name: '',
-              StartTime: '',
-              EndTime: ''
-            }
-          ],
-          Pauses: []
-        }
-      },
-      {
-        Date: '2023-01-18',
-        Runs: {
-          Name: 'Run abc',
-          StartTime: '2023-01-18 06:00',
-          EndTime: '2023-01-18 12:00',
-          Methods: [
-            {
-              Name: '',
-              StartTime: '',
-              EndTime: ''
-            }
-          ],
-          Pauses: []
-        }
-      },
-      {
-        Date: '2023-01-18',
-        Runs: {
-          Name: 'Run abc',
-          StartTime: '2023-01-18 14:00',
           EndTime: '2023-01-18 20:00',
           Methods: [
             {
@@ -371,8 +344,12 @@ export class ChartComponent implements AfterViewInit {
         }
       },
       {
+        Date: '2023-02-17',
+        Run: []
+      },
+      {
         Date: '2023-02-18',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-18 14:00',
           EndTime: '2023-02-18 20:00',
@@ -388,11 +365,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-19',
-        Runs: []
-      },
-      {
-        Date: '2023-02-19',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-18 23:00',
           EndTime: '2023-02-19 01:00',
@@ -408,7 +381,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-20',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-20 01:00',
           EndTime: '2023-02-20 02:00',
@@ -424,7 +397,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-21',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-21 03:00',
           EndTime: '2023-02-21 04:00',
@@ -441,7 +414,7 @@ export class ChartComponent implements AfterViewInit {
 
       {
         Date: '2023-02-22',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-22 08:00',
           EndTime: '2023-02-22 09:00',
@@ -458,7 +431,7 @@ export class ChartComponent implements AfterViewInit {
 
       {
         Date: '2023-02-23',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-23 10:00',
           EndTime: '2023-02-23 11:00',
@@ -474,11 +447,11 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-24',
-        Runs: []
+        Run: []
       },
       {
         Date: '2023-02-25',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-25 15:20',
           EndTime: '2023-02-25 17:20',
@@ -494,7 +467,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-26',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-25 21:20',
           EndTime: '2023-02-26 04:20',
@@ -510,7 +483,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-02-27',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-02-27 02:20',
           EndTime: '2023-02-27 18:20',
@@ -530,43 +503,27 @@ export class ChartComponent implements AfterViewInit {
         }
       },
       {
-        Date: '2023-02-27',
-        Runs: {
+        Date: '2023-02-28',
+        Run: {
           Name: 'Run abc',
-          StartTime: '2023-02-27 20:00',
-          EndTime: '2023-02-27 23:00',
+          StartTime: '2023-02-28 20:00',
+          EndTime: '2023-02-28 23:00',
           Methods: [
             {
               Name: '',
-              StartTime: '2023-02-27 21:30',
-              EndTime: '2023-02-27 22:10'
+              StartTime: '2023-02-28 21:30',
+              EndTime: '2023-02-28 22:10'
             }
           ],
           Pauses: []
         }
       },
       {
-        Date: '2023-03-11',
-        Runs: {
+        Date: '2023-03-09',
+        Run: {
           Name: 'Run abc',
-          StartTime: '2023-03-11 22:00',
-          EndTime: '2023-03-12 02:30',
-          Methods: [
-            {
-              Name: '',
-              StartTime: '',
-              EndTime: ''
-            }
-          ],
-          Pauses: []
-        }
-      },
-      {
-        Date: '2023-03-11',
-        Runs: {
-          Name: 'Run abc',
-          StartTime: '2023-03-11 15:00',
-          EndTime: '2023-03-11 17:00',
+          StartTime: '2023-03-09 22:00',
+          EndTime: '2023-03-10 02:30',
           Methods: [
             {
               Name: '',
@@ -579,7 +536,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-12',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-12 03:20',
           EndTime: '2023-03-12 04:20',
@@ -595,7 +552,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-13',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-13 13:00',
           EndTime: '2023-03-13 20:00',
@@ -616,7 +573,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-14',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-14 11:00',
           EndTime: '2023-03-14 20:00',
@@ -641,7 +598,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-15',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-15 15:00',
           EndTime: '2023-03-15 22:00',
@@ -662,7 +619,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-16',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-16 11:00',
           EndTime: '2023-03-16 20:00',
@@ -687,7 +644,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-17',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-17 03:00',
           EndTime: '2023-03-17 20:00',
@@ -712,7 +669,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-18',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-18 09:00',
           EndTime: '2023-03-18 21:00',
@@ -737,7 +694,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-19',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-19 12:00',
           EndTime: '2023-03-19 19:00',
@@ -758,7 +715,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-20',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-20 01:00',
           EndTime: '2023-03-20 19:00',
@@ -783,7 +740,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-21',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-21 12:00',
           EndTime: '2023-03-21 18:00',
@@ -804,7 +761,7 @@ export class ChartComponent implements AfterViewInit {
       },
       {
         Date: '2023-03-22',
-        Runs: {
+        Run: {
           Name: 'Run abc',
           StartTime: '2023-03-22 08:00',
           EndTime: '2023-03-22 18:00',
@@ -826,8 +783,17 @@ export class ChartComponent implements AfterViewInit {
             }
           ]
         }
+      },
+      {
+        Date: '2023-03-23',
+        Run: {
+          Name: 'Run abc',
+          StartTime: '2023-03-23 08:00',
+          EndTime: '2023-03-26 18:00',
+        }
       }
     ];
+
   }
 
   refreshChart() {
@@ -836,6 +802,7 @@ export class ChartComponent implements AfterViewInit {
     this.chartYvalues = [];
     this.tmpChartElement = [];
     this.barChartTemp();
+    this.lastWeek = null;
     this.barChart.data.datasets[0].data = this.data;
     this.barChart.data.datasets[0].backgroundColor = this.backgroundColors;
     this.barChart.update();
@@ -843,27 +810,20 @@ export class ChartComponent implements AfterViewInit {
 
   //method for filtering date
   filterDate(item: DropdownItem) {
-    console.log('Selected Item', item);
     this.loadMockupData();
+    this.lastWeekFilter = false;
     if (item.value === 'LastWeek') {
-      let lastWeek = this.getLastWeekDateRange();
-      console.log('Last week: ', lastWeek);
-
+      this.lastWeek = this.getLastWeekDateRange();
+      this.lastWeekFilter = true;
       this.mockUpChart = this.mockUpChart.filter((data: any) => {
-        return moment(data.Date).isBetween(lastWeek.lastWeekStart, lastWeek.lastWeekEnd, null, '[]');
+        return moment(data.Date).isBetween(this.lastWeek.lastWeekStart, this.lastWeek.lastWeekEnd, null, '[]');
       });
-
-      console.log('Filtered data week: ', this.mockUpChart);
     }
     if (item.value === 'LastMonth') {
       let lastMonth = this.getLastMonthRange();
-      console.log('Last month: ', lastMonth);
-
       this.mockUpChart = this.mockUpChart.filter((data: any) => {
         return moment(data.Date).isBetween(lastMonth.startDateMonth, lastMonth.endDateMonth, null, '[]');
       });
-
-      console.log('Filtered data month: ', this.mockUpChart);
     }
     if (item.value === 'CustomRange') {
       this.showCustomRange = true;
@@ -875,7 +835,6 @@ export class ChartComponent implements AfterViewInit {
 
   //method for custom range
   customRange(item: TecDateRangePickerValue) {
-    console.log('Custom Range selected', item);
     this.loadMockupData();
     if (!!item) {
       let customRange = this.getCustomRange(item.start, item.end);
@@ -890,6 +849,45 @@ export class ChartComponent implements AfterViewInit {
     const [datePart, timePart] = date.split(' ');
 
     return { date: datePart, time: timePart };
+  }
+
+  lastWeekShowingAllDays(lastWeek: any) {
+    let tmpDays = lastWeek.lastWeekStart;
+    this.backgroundColors = [];
+    for (let i = 0; i < 7; i++) {
+      var new_date = moment(tmpDays);
+      new_date.add(i + 1, 'days').format('YYYY-MM-DD');
+      var new_date_string = new_date.format('YYYY-MM-DD')
+      if (this.chartYvalues.length == 0) {
+        this.allDaysTime.forEach(allDays => {
+          var tmpDate = {
+            date: new_date.format('YYYY-MM-DD'),
+            startTime: `${new_date.format('YYYY-MM-DD')} ${allDays.StartTime}`,
+            endTime: `${new_date.format('YYYY-MM-DD')} ${allDays.EndTime}`
+          };
+          this.backgroundColors.push(this.defaultColor); //white
+          this.tmpLastWeekElements.push(tmpDate);
+        });
+      } else {
+        if (this.chartYvalues.filter((e: any) => e.date === new_date_string).length > 0) {
+          var tmpDate = this.chartYvalues.find((e: any) => e.date === new_date_string);
+          this.backgroundColors.push(tmpDate.color);
+          this.tmpLastWeekElements.push(tmpDate);
+        } else {
+          this.allDaysTime.forEach(allDays => {
+            var tmpDate = {
+              date: new_date.format('YYYY-MM-DD'),
+              startTime: `${new_date.format('YYYY-MM-DD')} ${allDays.StartTime}`,
+              endTime: `${new_date.format('YYYY-MM-DD')} ${allDays.EndTime}`
+            };
+            this.backgroundColors.push(this.defaultColor); //white
+            this.tmpLastWeekElements.push(tmpDate);
+          });
+        }
+      }
+    }
+    this.chartYvalues = this.tmpLastWeekElements;
+    this.tmpLastWeekElements = [];
   }
 
   getLastWeekDateRange() {
@@ -917,51 +915,69 @@ export class ChartComponent implements AfterViewInit {
   }
 
   barChartTemp() {
-    this.mockUpChart.forEach((element: any) => {
-      //fill in all intervals for each day - required for days that do not have intervals
-      this.allDaysTime.forEach(allDays => {
-        var tmpDate = {
-          date: element.Date,
-          startTime: `${element.Date} ${allDays.StartTime}`,
-          endTime: `${element.Date} ${allDays.EndTime}`
-        };
-        this.backgroundColors.push(this.defaultColor); //white
-        this.chartYvalues.push(tmpDate);
+    if (this.mockUpChart.length > 0) {
+      this.mockUpChart.forEach((element: any) => {
+        if (!!element.Run) {
+          if (element.Run.StartTime == undefined) {
+            var tmpDate = {
+              date: element.Date,
+              StartTime: `${element.Date} 00:00`,
+              EndTime: `${element.Date} 01:00`,
+              setWhiteColor: true
+            };
+            this.tmpChartElement.push(tmpDate);
+          } else {
+            this.tmpChartElement.push(element.Run);
+          }
+        }
       });
-      if (element.Runs != undefined && element.Runs != null) {
-        this.tmpChartElement.push(element.Runs);
-      }
-    });
+    }
 
     this.tmpChartElement.forEach((el: any) => {
-      //preparing runs element
+      //preparing run element
       if (el.StartTime != undefined && el.StartTime != null) {
         var tmpRun = {
           date: this.separateDate(el.StartTime).date,
           startTime: el.StartTime,
-          endTime: el.EndTime
+          endTime: el.EndTime,
+          color: this.runColor
         };
+
         //checking for start interval on the first day and ending on the second day
         if (this.separateDate(el.StartTime).date != this.separateDate(el.EndTime).date) {
           var startDate = {
             date: this.separateDate(el.StartTime).date,
             startTime: el.StartTime,
-            endTime: `${this.separateDate(el.StartTime).date} 23:59`
+            endTime: `${this.separateDate(el.StartTime).date} 23:59`,
+            color: this.twoDaysColor
           };
           var endDate = {
             date: this.separateDate(el.EndTime).date,
             startTime: `${this.separateDate(el.EndTime).date} 00:00`,
-            endTime: el.EndTime
+            endTime: el.EndTime,
+            color: this.twoDaysColor
           };
           this.chartYvalues.push(startDate);
           this.backgroundColors.push(this.twoDaysColor);
           this.chartYvalues.push(endDate);
           this.backgroundColors.push(this.twoDaysColor);
         } else {
-          this.chartYvalues.push(tmpRun);
-          this.backgroundColors.push(this.runsColor); //green
+          if (el.setWhiteColor == true) {
+            var tmpEmptyElement = {
+              date: this.separateDate(el.StartTime).date,
+              startTime: el.StartTime,
+              endTime: el.EndTime,
+              color: this.defaultColor
+            };
+            this.chartYvalues.push(tmpEmptyElement);
+            this.backgroundColors.push(this.defaultColor); //white
+          } else {
+            this.chartYvalues.push(tmpRun);
+            this.backgroundColors.push(this.runColor); //green
+          }
         }
       }
+
 
       //pauses
       if (el.Pauses != undefined && el.Pauses != null) {
@@ -977,7 +993,8 @@ export class ChartComponent implements AfterViewInit {
               var tmpPauses = {
                 date: this.separateDate(el.StartTime).date,
                 startTime: elPauses.StartTime,
-                endTime: elPauses.EndTime
+                endTime: elPauses.EndTime,
+                color: this.pauseColor
               };
               this.chartYvalues.push(tmpPauses);
               this.backgroundColors.push(this.pauseColor); //yellow
@@ -1000,7 +1017,8 @@ export class ChartComponent implements AfterViewInit {
               var tmpPauses = {
                 date: this.separateDate(el.StartTime).date,
                 startTime: elMethods.StartTime,
-                endTime: elMethods.EndTime
+                endTime: elMethods.EndTime,
+                color: this.methodColor
               };
               this.chartYvalues.push(tmpPauses);
               this.backgroundColors.push(this.methodColor); //blue
@@ -1009,6 +1027,9 @@ export class ChartComponent implements AfterViewInit {
         }
       }
     });
+    if (this.lastWeekFilter) {
+      this.lastWeekShowingAllDays(this.lastWeek);
+    }
 
     this.data = this.chartYvalues.map((item: any) => ({
       x: item.date,
@@ -1040,9 +1061,10 @@ export class ChartComponent implements AfterViewInit {
           },
           y: {
             min: moment('1970-02-01 00:00:00').valueOf(),
+            //beginAtZero: true,
             //max: moment('1970-02-01 23:59:59').valueOf(),
             ticks: {
-              stepSize: 3.6e6,
+              stepSize: 3.6e+6,
               callback: value => {
                 let date = moment(value);
                 // if (date.diff(moment('1970-02-01 23:59:59'), 'minutes') === 0) {
