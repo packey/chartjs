@@ -774,12 +774,12 @@ export class ChartComponent implements AfterViewInit {
           ],
           Pauses: [
             {
-              StartTime: '2023-03-14 13:00',
-              EndTime: '2023-03-14 14:30'
+              StartTime: '2023-03-22 13:00',
+              EndTime: '2023-03-22 14:30'
             },
             {
-              StartTime: '2023-03-14 15:00',
-              EndTime: '2023-03-14 16:30'
+              StartTime: '2023-03-22 15:00',
+              EndTime: '2023-03-22 16:30'
             }
           ]
         }
@@ -791,7 +791,57 @@ export class ChartComponent implements AfterViewInit {
           StartTime: '2023-03-23 08:00',
           EndTime: '2023-03-26 18:00',
         }
-      }
+      },
+      {
+        Date: '2023-03-27',
+        Run: {
+          Name: 'Run abc',
+          StartTime: '2023-03-27 08:00',
+          EndTime: '2023-03-27 18:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-27 13:00',
+              EndTime: '2023-03-27 14:30'
+            },
+            {
+              StartTime: '2023-03-27 15:00',
+              EndTime: '2023-03-27 16:30'
+            }
+          ]
+        }
+      },
+      {
+        Date: '2023-03-28',
+        Run: {
+          Name: 'Run abc',
+          StartTime: '2023-03-28 05:00',
+          EndTime: '2023-03-28 21:00',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: [
+            {
+              StartTime: '2023-03-28 10:00',
+              EndTime: '2023-03-28 11:30'
+            },
+            {
+              StartTime: '2023-03-28 13:00',
+              EndTime: '2023-03-28 14:30'
+            }
+          ]
+        }
+      },
     ];
 
   }
@@ -945,20 +995,40 @@ export class ChartComponent implements AfterViewInit {
 
         //checking for start interval on the first day and ending on the second day
         if (this.separateDate(el.StartTime).date != this.separateDate(el.EndTime).date) {
+          let startDateTmp = new Date(this.separateDate(el.StartTime).date);
+          let endDateTmp = new Date(this.separateDate(el.EndTime).date);
+          let days = Math.floor((endDateTmp.getTime() - startDateTmp.getTime()) / 1000 / 60 / 60 / 24); //calculate in days
           var startDate = {
             date: this.separateDate(el.StartTime).date,
             startTime: el.StartTime,
             endTime: `${this.separateDate(el.StartTime).date} 23:59`,
             color: this.twoDaysColor
           };
+          this.chartYvalues.push(startDate);
+          this.backgroundColors.push(this.twoDaysColor);
+          if (days > 1) {
+            let tmpDays = this.separateDate(el.StartTime).date;
+            for (let i = 0; i < days - 1; i++) {
+              var new_date = moment(tmpDays);
+              new_date.add(i + 1, 'days').format('YYYY-MM-DD');
+              var tmpDate = {
+                date: new_date.format('YYYY-MM-DD'),
+                startTime: `${new_date.format('YYYY-MM-DD')} 00:00`,
+                endTime: `${new_date.format('YYYY-MM-DD')} 23:59`,
+                color: this.twoDaysColor
+              };
+              this.backgroundColors.push(this.twoDaysColor);
+              this.chartYvalues.push(tmpDate);
+            }
+          }
+
           var endDate = {
             date: this.separateDate(el.EndTime).date,
             startTime: `${this.separateDate(el.EndTime).date} 00:00`,
             endTime: el.EndTime,
             color: this.twoDaysColor
           };
-          this.chartYvalues.push(startDate);
-          this.backgroundColors.push(this.twoDaysColor);
+
           this.chartYvalues.push(endDate);
           this.backgroundColors.push(this.twoDaysColor);
         } else {
