@@ -535,6 +535,22 @@ export class ChartComponent implements AfterViewInit {
         }
       },
       {
+        Date: '2023-03-11',
+        Run: {
+          Name: 'Run abc',
+          StartTime: '2023-03-11 08:20',
+          EndTime: '2023-03-11 14:20',
+          Methods: [
+            {
+              Name: '',
+              StartTime: '',
+              EndTime: ''
+            }
+          ],
+          Pauses: []
+        }
+      },
+      {
         Date: '2023-03-12',
         Run: {
           Name: 'Run abc',
@@ -906,7 +922,7 @@ export class ChartComponent implements AfterViewInit {
     this.backgroundColors = [];
     for (let i = 0; i < 7; i++) {
       var new_date = moment(tmpDays);
-      new_date.add(i + 1, 'days').format('YYYY-MM-DD');
+      new_date.add(i, 'days').format('YYYY-MM-DD');
       var new_date_string = new_date.format('YYYY-MM-DD')
       if (this.chartYvalues.length == 0) {
         this.allDaysTime.forEach(allDays => {
@@ -942,8 +958,8 @@ export class ChartComponent implements AfterViewInit {
 
   getLastWeekDateRange() {
     let currentDate = moment();
-    let lastWeekStartDate = moment(currentDate).subtract(1, 'week').startOf('week');
-    let lastWeekEndDate = moment(currentDate).subtract(1, 'week').endOf('week');
+    let lastWeekStartDate = moment(currentDate).subtract(1, 'week').startOf('isoWeek');
+    let lastWeekEndDate = moment(currentDate).subtract(1, 'week').endOf('isoWeek');
 
     return { lastWeekStart: lastWeekStartDate.format('YYYY-MM-DD'), lastWeekEnd: lastWeekEndDate.format('YYYY-MM-DD') };
   }
@@ -1133,6 +1149,7 @@ export class ChartComponent implements AfterViewInit {
             min: moment('1970-02-01 00:00:00').valueOf(),
             //beginAtZero: true,
             //max: moment('1970-02-01 23:59:59').valueOf(),
+            reverse: true,
             ticks: {
               stepSize: 3.6e+6,
               callback: value => {
