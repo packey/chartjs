@@ -13,6 +13,7 @@ export class ChartComponent implements AfterViewInit {
   @ViewChild('barCanvas') barCanvas: ElementRef | undefined;
   barChart: any;
   tmpChartElement: any[] = [];
+  tmpChartYvalue: any[] = [];
   data: any;
 
   chartYvalues: any[] = [];
@@ -360,7 +361,12 @@ export class ChartComponent implements AfterViewInit {
               EndTime: ''
             }
           ],
-          Pauses: []
+          Pauses: [
+            {
+              StartTime: '2023-02-18 18:00',
+              EndTime: '2023-02-18 19:00'
+            }
+          ]
         }
       },
       {
@@ -936,9 +942,18 @@ export class ChartComponent implements AfterViewInit {
         });
       } else {
         if (this.chartYvalues.filter((e: any) => e.date === new_date_string).length > 0) {
-          var tmpDate = this.chartYvalues.find((e: any) => e.date === new_date_string);
-          this.backgroundColors.push(tmpDate.color);
-          this.tmpLastWeekElements.push(tmpDate);
+          this.chartYvalues.map(item => {
+            if (item.date === new_date_string) {
+              this.tmpChartYvalue.push(item);
+            }
+          });
+          if (this.tmpChartYvalue.length > 0) {
+            this.tmpChartYvalue.forEach(element => {
+              this.backgroundColors.push(element.color);
+              this.tmpLastWeekElements.push(element);
+            });
+          }
+          this.tmpChartYvalue = [];
         } else {
           this.allDaysTime.forEach(allDays => {
             var tmpDate = {
@@ -952,6 +967,7 @@ export class ChartComponent implements AfterViewInit {
         }
       }
     }
+
     this.chartYvalues = this.tmpLastWeekElements;
     this.tmpLastWeekElements = [];
   }
@@ -1117,6 +1133,8 @@ export class ChartComponent implements AfterViewInit {
       this.lastWeekShowingAllDays(this.lastWeek);
     }
 
+    //this.chartYvalues = this.chartYvalues.filter((item, idx) => idx < 15); //added logic for showing the first n elements on x-axis
+
     this.data = this.chartYvalues.map((item: any) => ({
       x: item.date,
       y: [
@@ -1144,6 +1162,18 @@ export class ChartComponent implements AfterViewInit {
         scales: {
           x: {
             //min: '2021-11-07',
+            //type: 'time',
+            // time: {
+            //   displayFormats: {
+            //     quarter: 'MMM YYYY'
+            //   }
+            // }
+            // ticks: {
+            //   // Include a dollar sign in the ticks
+            //   callback: function (value, index, ticks) {
+            //     return '$' + value;
+            //   }
+            // }
           },
           y: {
             min: moment('1970-02-01 00:00:00').valueOf(),
